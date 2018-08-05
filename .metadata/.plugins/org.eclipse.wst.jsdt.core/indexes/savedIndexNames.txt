@@ -1,0 +1,6 @@
+INDEX VERSION 1.4+C:\Users\kotavasudeva\inmar\inmar_project\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+506065340.index
+3822158096.index
+1599521208.index
+840602661.index
+1696043518.index

@@ -1,0 +1,7 @@
+package com.vinay.repositories;
+
+@Transactional
+@Repository
+public interface Category001DAO extends CrudRepository<Category_SKU003, Long>{
+
+}

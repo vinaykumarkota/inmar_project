@@ -1,0 +1,27 @@
+package com.vinay.entities;
+
+import java.io.Serializable;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="SKU001_LOCATION")
+public class LOCATION_SKU001 implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@Column(name="SKU001_LOCATION_ID")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Long sku001LocationId;
+	
+	@Column(name="SKU001_LOCATION_NAME)
+	private String sku001LocationName;
+	
+	@Column(name="ESIP006_DEVICE_TYP_C")
+	private String esip006DevTypeC;
+	
+	@Column(name="ESIP006_DEVICE_TYP_C")
+	private String esip006DevTypeC;
+}

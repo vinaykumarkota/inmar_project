@@ -1,0 +1,75 @@
+/**
+ * 
+ */
+
+productAppModule.controller("subcategoryController", [
+	'$scope',
+	'$http',
+	'subCategoryService',function($scope, $http,subCategoryService){
+	
+$scope.statusDropdown = ["Active","In-Active"];
+	
+	$scope.subcategoryName="";
+	$scope.subcategoryDesc="";
+	$scope.locationName="";
+	$scope.departmentName="";
+	$scope.selectedStatus="";
+
+	
+	$scope.init=function(){
+		
+		$scope.locationDropdown=["USA","Canada"];
+		$scope.departmentDropdown=["Bakery","Dairy","Vegetables"];
+		//data table
+		$scope.subCategoryData=[];
+		subCategoryService.getAllSubCategories().then(function(data) {
+			$scope.subCategoryData = data;
+			console.log($scope.subCategoryData);
+			$scope.count = $scope.subCategoryData.length;
+			$scope.$digest();
+		}, function() {
+			// alert('error');
+		});
+	}
+	
+	$scope.saveLocation=function(){
+		$scope.subcategorySaveData ={
+				 'subcategoryId':1,
+				 'subcategoryName':$scope.subcategoryObject.categoryName,
+				 'subcategoryDesc': $scope.subcategoryObject.categoryDesc,
+				 'locationName':$scope.subcategoryObject.locationName,
+				 'departmentName':$scope.subcategoryObject.departmentName,
+//				 'categoryName':$scope.subcategoryObject.
+		         'activeFlag': $scope.subcategoryObject.selectedStatus,
+		         'editable':false
+	   			
+	   	}
+		//to  save service
+		console.log($scope.subcategorySaveData);
+	}
+	
+	
+}]);
+productAppModule
+.service(
+		"subCategoryService",
+		[
+				'$http',
+				function($http) {
+
+
+					this.getAllSubCategories = function() {
+						return new Promise(
+								function(resolve, reject) {
+									$http
+											.get(
+													'http://localhost:9060/Data/subcategory/allSubCategories')
+											.then(function(response) {
+												resolve(response.data);
+											}, function(error) {
+												reject([]);
+											});
+								});
+					}
+
+				} ]);

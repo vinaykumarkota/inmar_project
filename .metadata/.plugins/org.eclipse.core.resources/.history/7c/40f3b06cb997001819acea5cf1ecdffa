@@ -1,0 +1,13 @@
+/**
+ * 
+ */
+$('#example').DataTable();
+	var table = $('#example').DataTable();
+
+	//#myInput is a <input type="text"> element
+	$('#searchKeyword').on('keyup', function() {
+		table.search(this.value).draw();
+	});
+	
+	
+	

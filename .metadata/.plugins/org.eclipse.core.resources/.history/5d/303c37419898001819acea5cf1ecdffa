@@ -1,0 +1,22 @@
+package com.vinay.controllers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.vinay.services.SubCategoryService;
+
+@RestController
+@RequestMapping(value="/subcategory")
+public class SubCategoryController {
+	
+	@Autowired
+	SubCategoryService subCategoryService;
+	
+	@RequestMapping("/allSubCategories")
+	public String getAllSubCategories(){
+		subCategoryService.getAllSubCategories();
+		return "Yes";
+	}
+
+}

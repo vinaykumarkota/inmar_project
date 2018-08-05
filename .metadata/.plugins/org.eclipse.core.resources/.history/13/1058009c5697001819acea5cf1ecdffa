@@ -1,0 +1,78 @@
+/**
+ * 
+ */
+
+productAppModule.controller("locationController", function($scope, $http){
+
+	
+	$scope.statusDropdown = ["Active","In-Active"];
+	$scope.location="";
+	$scope.locationDesc="";
+	$scope.selectedStatus="";
+
+	
+	$scope.init=function(){
+		
+		$scope.locationData=[];
+		
+	}
+	
+	$scope.saveLocation=function(){
+		$scope.locationSaveData ={
+				 'locationId':1,
+				 'locationName':$scope.locationObject.location,
+				 'locationDesc': $scope.locationObject.locationDesc,
+		         'activeFlag': $scope.locationObject.selectedStatus,
+		         'editable':false
+	   			
+	   	}
+		//to  save service
+		console.log($scope.locationSaveData);
+	}
+	
+	
+ //checkbox listeners
+	
+});
+
+
+productAppModule.service("warningSummaryService",['$http',function($http){
+	
+	this.srchWarningSummary = function(data) { 
+		return new Promise(function(resolve,reject){
+			$http.get('http://localhost:9060/EsipService/WarningSummary/WarningDtl',data).then(
+				function(response){
+					resolve(response.data);
+				},
+				function(error){
+					reject([]);
+				});
+		});
+		}
+	
+	this.srchAllWarnings = function() { 
+		return new Promise(function(resolve,reject){
+			$http.get('http://localhost:9060/EsipService/WarningSummary/WarningDtlList').then(
+				function(response){
+					resolve(response.data);
+				},
+				function(error){
+					reject([]);
+				});
+		});
+		}
+
+	this.saveWarningSummary=function(data)
+	{
+			return new Promise(function(resolve,reject){
+			$http.post('http://localhost:9060/EsipService/WarningSummary/SaveWarning',data).then(
+			function(response){
+			resolve(response.data);
+			},
+			function(error){
+			reject([]);
+			});
+			});
+	}
+
+}]);

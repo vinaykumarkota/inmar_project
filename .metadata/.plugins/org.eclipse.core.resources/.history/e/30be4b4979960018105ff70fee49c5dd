@@ -1,0 +1,7 @@
+package com.vinay.entities;
+
+import java.io.Serializable;
+
+public class Category_SKU003 implements Serializable{
+
+}

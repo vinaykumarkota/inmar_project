@@ -1,0 +1,43 @@
+package com.vinay.services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.vinay.entities.Department_SKU002;
+import com.vinay.repositories.Department002DAO;
+import com.vinay.repositories.Location001DAO;
+import com.vinay.vo.CommonUtil;
+import com.vinay.vo.DepartmentVo;
+
+@Service
+public class DepartmentService {
+	
+	@Autowired
+	Department002DAO departmentDAO;
+	
+	@Autowired
+	Location001DAO location001DAO;
+
+	public void getAllDepartments(){
+		Iterable<Department_SKU002> departmentsList=departmentDAO.findAll();
+		for (Department_SKU002 deptObj : departmentsList) {
+			System.out.println("department id : "+deptObj.getSku002DepartmentId());
+			
+		}
+	}
+	
+	public List<DepartmentVo> saveDepartments(List<DepartmentVo> deptList){
+		for (DepartmentVo deptVo : deptList) {
+			Department_SKU002 deptObj=new Department_SKU002();
+			deptObj.setSku002DepartmentName(deptVo.getDepartmentName());
+			deptObj.setSku002DepartmentDesc(deptVo.getDepartmentDesc());
+			deptObj.setLocation(location001DAO.findById(deptVo.getLocationID()).get());
+			deptObj.setSku002ActiveFlag(CommonUtil.getStatusCode(deptVo.getActiveFlag()));
+			if(deptVo.getDepartmentId()!=null)
+				deptObj.setSku002DepartmentId(deptVo.getDepartmentId());
+		}
+		return deptList;
+	}
+}

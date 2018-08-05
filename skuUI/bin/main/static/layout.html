@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:jc="http://jcoe.ford.com/jsfcore"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<head>
+
+  
+<style>
+
+
+#header, #footer {
+	padding: 1em;
+	color: white;
+	background-color: #005a8c;
+	clear: left;
+	text-align: center;
+}
+
+
+
+img {
+	float: left
+}
+
+#header {
+
+	background-image: url("images/bgg.jpg");
+}
+#body {
+background-image: url("images/bgn.jpg");
+
+}
+#content{
+background-image: url("images/backg.jpg");
+
+    height: 600px;
+    padding-left: 30px;
+    padding-right: 50px;
+    width: 1250px;
+    border-left-width: 50px;
+    margin-left: 0px;
+
+}
+
+</style>
+
+
+ 
+
+<script type="text/javascript">
+$('#example').DataTable();
+var table = $('#example').DataTable();
+
+//#myInput is a <input type="text"> element
+$('#searchKeyword').on( 'keyup', function () {
+ table.search( this.value ).draw();
+} );
+</script>
+
+    <style type="text/css">
+        .auto-style7 {
+            width: 127px;
+        }
+        .auto-style9 {
+            width: 192px;
+        }
+        .auto-style10 {
+            width: 175px;
+        }
+        .auto-style11 {
+            width: 61px;
+        }
+         div.navbar-collapse.collapse {
+    	display: block;
+    	overflow: hidden;
+    	max-height: 0px;
+    	-webkit-transition: max-height .3s ease;
+    	-moz-transition: max-height .3s ease;
+    	-o-transition: max-height .3s ease;
+    	transition: max-height .3s ease;
+    }
+    div.navbar-collapse.collapse.in {
+    	max-height: 2000px;
+    }
+    
+    
+   
+  body {
+      position: relative; 
+  }
+  
+  </style>
+</head>
+<body style="width: 1300px;" id="body">
+
+	<div id="page">
+		<div id="header-container">
+			<div id="header" style="height: 110px;">
+				<ui:insert name="header" id="header">
+					
+					
+					
+					</ui:insert>
+					</div>
+					
+		</div>
+
+		<div id="content-container">
+			<div id="content">
+				<ui:insert name="content">
+
+				</ui:insert>
+			</div>
+
+		</div>
+		<div >
+			<div id="footer">
+				<ui:insert name="footer" >
+					
+					
+				</ui:insert>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

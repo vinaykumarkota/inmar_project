@@ -1,0 +1,4 @@
+server.servlet.context-path=/UiWeb
+spring.mvc.view.prefix=/uiviews/
+spring.mvc.view.suffix=.html
+server.port=9010

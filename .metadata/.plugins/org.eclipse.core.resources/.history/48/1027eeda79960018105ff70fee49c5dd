@@ -1,0 +1,10 @@
+package com.vinay.entities;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="SKU003_CATEGORY")
+public class SubCategory_SKU004 {
+
+}

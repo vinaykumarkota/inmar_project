@@ -1,0 +1,6 @@
+package com.vinay.services;
+
+@Service
+public class CategoryService {
+
+}

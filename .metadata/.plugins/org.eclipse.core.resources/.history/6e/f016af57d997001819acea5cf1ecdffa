@@ -1,0 +1,170 @@
+/**
+ * 
+ */
+
+productAppModule.controller("locationController", ['$scope','$http','locationService', function($scope, $http,locationService){
+
+	
+	$scope.statusDropdown = ["Active","In-Active"];
+	$scope.location="";
+	$scope.locationDesc="";
+	$scope.selectedStatus="";
+
+	$scope.checkToggle;
+	  
+	
+	$scope.init=function(){
+		$scope.locationData=[];
+		$scope.checkToggle=false;
+		locationService.getAllLocations()
+		.then(
+			function(data){
+				$scope.locationData=data;
+//				console.log($scope.locationData);
+				$scope.count=$scope.locationData.length;
+				$scope.$digest();
+			},
+			function()
+			{
+//				alert('error');
+			}
+			);
+		
+	}
+	
+	$scope.SelectAll=function(){
+		
+		angular.forEach($scope.locationData, function(
+				data) {
+			
+			data.editable=$scope.checkToggle;
+		});
+		$scope.$digest();
+	}
+	
+	$scope.onCheckBoxChange=function(value){
+		if(value==null){
+			angular.forEach($scope.locationData, function(
+					data) {
+				if(data.editable==false)
+					$scope.checkToggle=false;
+				
+			});
+		}
+	}
+	
+	$scope.refresh=function(){
+		$scope.bol = false;
+		$scope.init();
+	}
+	
+	$scope.addRow = function(){		
+		$scope.count=1;
+		$scope.bol = true;
+		$scope.checkToggle=true;
+		$scope.locationData = [];
+		$scope.checkValue = true;
+		$scope.locationData.push({"locationId":null,"locationName":"","locationDesc":"","activeFlag":"active","editable":true,"id":$scope.count});
+		
+
+};
+
+$scope.addRow2 = function(){		
+		$scope.count++;
+		$scope.checkValue = true;
+		$scope.locationData.push({"locationId":null,"locationName":"","locationDesc":"","activeFlag":"active","editable":true,"id":$scope.count});
+	
+};
+	
+$scope.updateMainScreen=function(){
+	$scope.newData=[];
+	console.log($scope.locationData);
+	angular.forEach($scope.locationData, function(
+			data) {
+		if(data.editable==true)
+			$scope.newData.push(data);
+	});
+	
+	locationService.saveLocationData($scope.newData)
+	.then(
+		function(data){
+			$scope.locationData=data;
+//			console.log($scope.locationData);
+			$scope.count=$scope.locationData.length;
+			$scope.init();
+			$scope.$digest();
+		},
+		function()
+		{
+//			alert('error');
+		}
+		);
+	
+}
+
+$scope.deleteRow=function(value){
+	
+	locationService.deleteLocation(value)
+	.then(
+		function(data){
+//			$scope.locationData=data;
+//			console.log($scope.locationData);
+			$scope.init();
+			$scope.count=$scope.locationData.length;
+			$scope.$digest();
+		},
+		function()
+		{
+//			alert('error');
+		}
+		);
+}
+
+	
+	
+ //checkbox listeners
+	
+}]);
+
+
+productAppModule.service("locationService",['$http',function($http){
+	
+	this.deleteLocation=function(data)
+	{
+			return new Promise(function(resolve,reject){
+			$http.post('http://localhost:9060/Data/location/deleteLocation',data).then(
+			function(response){
+			resolve(response.data);
+			},
+			function(error){
+			reject([]);
+			});
+			});
+	}
+	
+	this.getAllLocations = function() { 
+		return new Promise(function(resolve,reject){
+			$http.get('http://localhost:9060/Data/location/allLocations').then(
+				function(response){
+					resolve(response.data);
+				},
+				function(error){
+					reject([]);
+				});
+		});
+		}
+
+	this.saveLocationData=function(data)
+	{
+			return new Promise(function(resolve,reject){
+			$http.post('http://localhost:9060/Data/location/saveLocations',data).then(
+			function(response){
+			resolve(response.data);
+			},
+			function(error){
+			reject([]);
+			});
+			});
+	}
+
+}]);

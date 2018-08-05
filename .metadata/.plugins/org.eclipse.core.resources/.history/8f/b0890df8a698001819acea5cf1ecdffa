@@ -1,0 +1,14 @@
+package com.vinay.repositories;
+
+import javax.transaction.Transactional;
+
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+import com.vinay.entities.Category_SKU003;
+
+@Transactional
+@Repository
+public interface Category003DAO extends CrudRepository<Category_SKU003, Long>{
+
+}

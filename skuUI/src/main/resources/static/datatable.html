@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<script src="Scripts/angular.min.js" type="text/javascript"></script>
+<script src="myapp.js" type="text/javascript"></script>
+<script src="checkbox.js" type="text/javascript"></script>
+<script src="Scripts/bootstrap.min.js"></script>
+<link href="Content/bootstrap.min.css" rel="stylesheet" />
+<script src="Scripts/dirPagination.js"></script>
+<script src="https://code.angularjs.org/1.2.16/angular.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script type="text/javascript">
+
+</script>
+<title>Insert title here</title>
+</head>
+<body>
+<div class="row">
+    <div class="col-sm-12">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                <th><input type="checkbox"/></th>
+				<th>Line no</th>
+				<th>SAC / HSN</th>
+				<th>Product Code</th>
+				<th>Tax Type</th>
+				<th>Rate of Tax in (%)</th>
+				<th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="e in students">
+                    <td class="col-sm-1">
+                        <input type="checkbox" ng-model="checkSelected" ng-change="onCheckBoxChange($index)" ng-show="not e.editable" class="col-sm-12" placeholder="col-sm-1" />
+                    </td>
+                    <td class="col-sm-1">
+                        <input type="text" ng-model="e.id" ng-show="e.editable" class="col-sm-12" placeholder="col-sm-1" />
+                        <span ng-hide="e.editable">{{ e.id }}</span>
+                    </td>
+                    <td class="col-sm-1">
+                        <input class="col-sm-12" placeholder="col-sm-1" />
+                    </td>
+                    <td class="col-sm-4">
+                        <input class="col-sm-12" placeholder="col-sm-4" />
+                    </td>
+                    <td class="col-sm-2">
+                        <input class="col-sm-12" placeholder="col-sm-2" />
+                    </td>
+                    <td class="col-sm-3">
+                        <input class="col-sm-12" placeholder="col-sm-3" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,21 @@
+package com.vinay.services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.vinay.entities.Category_SKU003;
+import com.vinay.repositories.Category003DAO;
+
+@Service
+public class CategoryService {
+	
+	@Autowired
+	Category003DAO categoryDAO;
+	
+	public void getAllCategories() {
+		Iterable<Category_SKU003> categoriesList=categoryDAO.findAll();
+	}
+
+}

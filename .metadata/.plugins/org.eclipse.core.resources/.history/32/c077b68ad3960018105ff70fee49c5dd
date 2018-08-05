@@ -1,0 +1,20 @@
+package com.vinay.entities;
+
+import java.io.Serializable;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="SKU005_SKUTXN")
+public class SkuTransaction_SKU005 implements Serializable{
+	
+private static final long serialVersionUID = 1L;
+	
+	
+	public SubCategory_SKU004() {
+	
+	}
+
+
+}

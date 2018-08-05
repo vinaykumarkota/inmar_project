@@ -1,0 +1,53 @@
+package com.vinay.entities;
+
+import java.io.Serializable;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="SKU005_SKUTXN")
+public class SkuTransaction_SKU005 implements Serializable{
+	
+private static final long serialVersionUID = 1L;
+	
+	
+	public SkuTransaction_SKU005() {
+	
+	}
+
+	@Id
+	@Column(name="SKU005_SKUTXN_ID")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Long sku005SkuTransactionId;
+	
+	@Column(name="SKU004_SKUTXN_NAME")
+	private String sku005SkuTransactionName;
+	
+	@ManyToOne(cascade= CascadeType.ALL,fetch=FetchType.LAZY)
+	@JoinColumn(name="SKU003_CATEGORY_ID")
+	private Category_SKU003 category;
+	
+	@ManyToOne(cascade= CascadeType.ALL,fetch=FetchType.LAZY)
+	@JoinColumn(name="SKU002_DEPARTMENT_ID")
+	private Department_SKU002 department;
+	
+	@ManyToOne(cascade= CascadeType.ALL,fetch=FetchType.LAZY)
+	@JoinColumn(name="SKU001_LOCATION_ID")
+	private Location_SKU001 location;
+	
+	@ManyToOne(cascade= CascadeType.ALL,fetch=FetchType.LAZY)
+	@JoinColumn(name="SKU004_SUBCATEGORY_ID")
+	private SubCategory_SKU004 subCategory;
+	
+	
+
+}

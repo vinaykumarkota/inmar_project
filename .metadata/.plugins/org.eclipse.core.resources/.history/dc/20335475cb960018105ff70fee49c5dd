@@ -1,0 +1,8 @@
+package com.vinay.services;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class LocationService {
+
+}

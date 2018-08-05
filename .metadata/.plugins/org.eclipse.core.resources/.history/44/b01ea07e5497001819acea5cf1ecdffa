@@ -1,0 +1,36 @@
+/**
+ * 
+ */
+
+productAppModule.controller("oneController", function($scope, $http){
+
+	
+	$scope.statusDropdown = ["Active","In-Active"];
+	$scope.location="";
+	$scope.locationDesc="";
+	$scope.selectedStatus="";
+
+	
+	$scope.init=function(){
+		
+		$scope.locationData=[];
+		
+	}
+	
+	$scope.saveLocation=function(){
+		$scope.locationSaveData ={
+				 'locationId':1,
+				 'locationName':$scope.locationObject.location,
+				 'locationDesc': $scope.locationObject.locationDesc,
+		         'activeFlag': $scope.locationObject.selectedStatus,
+		         'editable':false
+	   			
+	   	}
+		//to  save service
+		console.log($scope.locationSaveData);
+	}
+	
+	
+ //checkbox listeners
+	
+});

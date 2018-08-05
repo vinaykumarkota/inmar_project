@@ -1,0 +1,5 @@
+package com.vinay.entities;
+
+public class LOCATION_SKU001 implements Serializable{
+
+}

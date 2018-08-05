@@ -1,0 +1,43 @@
+<html>
+<head>
+  <title>Page Title</title>
+  <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+
+var inboundAppModule = angular.module("inboundApp", []);
+
+
+inboundAppModule.controller("inboundCtrl", function($scope, $http){
+	function readSingleFile(evt) {
+	    //Retrieve the first (and only!) File from the FileList object
+	    $scope.f = evt.target.files[0]; 
+
+	    if ($scope.f) {
+	    	$scope.r = new FileReader();
+	    	$scope.r.onload = function(e) { 
+	    		$scope.contents = e.target.result;
+	        alert( $scope.contents
+	        );  
+	      }
+	      r.readAsText(f);
+	    } else { 
+	      alert("Failed to load file");
+	    }
+	  }
+
+	  document.getElementById('fileinput').addEventListener('change', readSingleFile, false);
+	
+	
+});
+
+
+  
+</script>
+  
+</head>
+<body ng-app="inboundApp" ng-controller="inboundCtrl">
+<input type="file" id="fileinput" />
+
+</body>
+</html>
+</br></br>

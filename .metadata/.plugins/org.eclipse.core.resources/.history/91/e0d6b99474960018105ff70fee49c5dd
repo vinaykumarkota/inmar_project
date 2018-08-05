@@ -1,0 +1,14 @@
+package com.vinay.skuservice;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@Configuration
+@ComponentScan(basePackages={"com.vinay.repositories","com.vinay.controllers","com.vinay.services","com.vinay.cors"})
+@SpringBootApplication
+public class SkuserviceApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(SkuserviceApplication.class, args);
+	}
+}

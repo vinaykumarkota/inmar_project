@@ -1,0 +1,19 @@
+@CHARSET "ISO-8859-1";
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 300;
+}
+
+p {
+  color: #999;
+}
+
+strong {
+  color: #333;
+}
+
+
+

@@ -1,0 +1,85 @@
+
+<p>&nbsp;</p>
+<p>
+<h3 align="left" style="margin-left: 1%;">Department Master</h3>
+</p>
+<div>
+
+	<div class="panel panel-default" ng-init="init()" style="margin-right: 1%; margin-left: 1%;">
+		<div class="panel-body">
+			<table id="example"
+				class="table table-striped table-bordered dt-responsive nowrap"
+				cellspacing="0" width="100%" style="margin-bottom: 0px;">
+				<thead>
+					<tr>
+						<th class="auto-style11"><input type="checkbox"
+							ng-model="checkSelected2" ng-change="SelectAll(5,1)"
+							id="checkMain" ng-checked="checkToggle" /></th>
+						<th class="auto-style7">Lineno <a href=""
+							ng-click="orderByField='id'; reverseSort = !reverseSort"><i
+								class="fa fa-angle-down"></i></a>
+						</th>
+						<th class="auto-style10"><a href=""
+							ng-click="orderByField='departmentName'; reverseSort = !reverseSort">
+								Department Name</a></th>
+						<th class="auto-style9"><a href=""
+							ng-click="orderByField='departmentDesc'; reverseSort = !reverseSort">Department
+								Description</a></th>
+						<th class="auto-style9"><a href=""
+							ng-click="orderByField='locationName'; reverseSort = !reverseSort">Location
+								Name</a></th>
+					</tr>
+				</thead>
+
+				<tr dir-paginate="e in departmentData |itemsPerPage:selectedPageno"
+					current-page="currentpage" style="height: 43px;">
+					<td class="auto-style11"><input type="checkbox"
+						ng-model="checkSelected" ng-change="onCheckBoxChange(e.id)"
+						id="checkData" ng-checked="checkValue" /></td>
+					<td class="auto-style7"><span ng-show="e.editable"
+						style="height: 43px;"> {{ e.departmentId }} </span> <span
+						ng-hide="e.editable" style="height: 43px;"> {{
+							e.departmentId }} </span></td>
+					<td class="auto-style10"><span> <input type="text"
+							ng-model="e.departmentName" ng-show="e.editable"
+							style="width: 82px; height: 26px;" required>
+					</span> <span ng-hide="e.editable" style="height: 43px;"> {{
+							e.departmentName }} </span></td>
+					<td class="auto-style9"><span><input type="text"
+							ng-model="e.departmentDesc" ng-show="e.editable"
+							style="width: 82px" required></span> <span ng-hide="e.editable"
+						style="height: 43px;">{{ e.departmentDesc }}</span></td>
+					<td class="auto-style9"><span><input type="text"
+							ng-model="e.locationName" ng-show="e.editable"
+							style="width: 82px" required></span> <span ng-hide="e.editable"
+						style="height: 43px;">{{ e.locationName }}</span></td>
+					<td class="auto-style10"><span><input type="text"
+							ng-model="e.activeFlag" ng-show="e.editable" style="width: 103px"
+							required></span> <span ng-hide="e.editable"
+						style="height: 43px;">{{ e.activeFlag }}</span></td>
+
+
+				</tr>
+
+			</table>
+			<div class="row">
+
+				<div class="col-md-4" style="margin-top: 23px;">
+					Results per page: <select ng-model="selectedPageno"
+						ng-options="x for x in pageno">
+					</select>
+				</div>
+				<div class="col-md-4" style="margin-top: 23px;">Department
+					Maintainance 1- {{selectedPageno}} Records of {{count}}</div>
+				<div class="col-md-4" style="height: 50px;">
+					<dir-pagination-controls max-size="4" direction-links="true"
+						boundary-links="true"> </dir-pagination-controls>
+				</div>
+			</div>
+
+
+
+
+		</div>
+	</div>
+</div>

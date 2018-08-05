@@ -1,0 +1,13 @@
+package com.vinay.repositories;
+
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class CustomQuery {
+	
+	@Autowired
+	DataSource dataSource;
+
+	Connection conn = null;
+	
+}

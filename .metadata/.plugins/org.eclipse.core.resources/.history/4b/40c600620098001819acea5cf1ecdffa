@@ -1,0 +1,189 @@
+/**
+ * 
+ */
+productAppModule.controller("departmentController", [
+		'$scope',
+		'$http',
+		'departmentService','locationService',
+		function($scope, $http, departmentService,locationService) {
+			$scope.statusDropdown = [ "Active", "In-Active" ];
+
+			$scope.department = "";
+			$scope.departmentDesc = "";
+			$scope.locationName = "";
+			$scope.selectedStatus = "";
+
+			$scope.init = function() {
+
+				$scope.locationDropdown = [ "USA", "Canada" ];
+				$scope.checkToggle=false;
+				$scope.departmentData = [];
+				departmentService.getAllDepartments().then(function(data) {
+					$scope.departmentData = data;
+					console.log($scope.departmentData);
+					$scope.count = $scope.departmentData.length;
+					$scope.$digest();
+				}, function() {
+					// alert('error');
+				});
+
+				locationService.getAllLocations()
+				.then(
+					function(data){
+						$scope.locationData=data;
+						$scope.count=$scope.locationData.length;
+						$scope.$digest();
+					},
+					function()
+					{
+//						alert('error');
+					}
+					);
+				
+			}
+
+			$scope.SelectAll = function() {
+
+				angular.forEach($scope.departmentData, function(data) {
+
+					data.editable = $scope.checkToggle;
+				});
+				$scope.$digest();
+			}
+
+			$scope.onCheckBoxChange = function(value) {
+				$scope.checkToggle = true;
+				angular.forEach($scope.departmentData, function(data) {
+					if (data.editable == false)
+						$scope.checkToggle = false;
+
+				});
+
+			}
+
+			$scope.refresh = function() {
+				$scope.bol = false;
+				$scope.init();
+			}
+
+			$scope.addRow = function() {
+				$scope.count = 1;
+				$scope.bol = true;
+				$scope.checkToggle = true;
+				$scope.departmentData = [];
+				$scope.checkValue = true;
+				$scope.departmentData.push({
+					"departmentId" : null,
+					"departmentName" : "",
+					"departmentDesc" : "",
+					"activeFlag" : "active",
+					"editable" : true,
+					"locationName":"",
+					"id" : $scope.count
+				});
+
+			};
+
+			$scope.addRow2 = function() {
+				$scope.count++;
+				$scope.checkValue = true;
+				$scope.departmentData.push({
+					"departmentId" : null,
+					"departmentName" : "",
+					"departmentDesc" : "",
+					"activeFlag" : "active",
+					"editable" : true,
+					"locationName":"",
+					"id" : $scope.count
+				});
+
+			};
+
+			$scope.updateMainScreen = function() {
+				$scope.newData = [];
+				angular.forEach($scope.departmentData, function(data) {
+					if (data.editable == true)
+						$scope.newData.push(data);
+				});
+				console.log($scope.newData);
+
+				departmentService.saveDepartmentData($scope.newData).then(
+						function(data) {
+							$scope.departmentData = data;
+							// console.log($scope.departmentData);
+							$scope.count = $scope.departmentData.length;
+							$scope.init();
+							$scope.$digest();
+						}, function() {
+							// alert('error');
+						});
+
+			}
+
+			$scope.deleteRow = function(value) {
+
+				departmentService.deleteDepartment(value).then(function(data) {
+					// $scope.departmentData=data;
+					// console.log($scope.departmentData);
+					$scope.init();
+					$scope.count = $scope.departmentData.length;
+					$scope.$digest();
+				}, function() {
+					// alert('error');
+				});
+			}
+
+		} ]);
+
+productAppModule
+		.service(
+				"departmentService",
+				[
+						'$http',
+						function($http) {
+
+							this.deleteDepartment = function(data) {
+								return new Promise(
+										function(resolve, reject) {
+											$http
+													.post(
+															'http://localhost:9060/Data/department/deleteDepartment',
+															data)
+													.then(function(response) {
+														resolve(response.data);
+													}, function(error) {
+														reject([]);
+													});
+										});
+							}
+
+							this.getAllDepartments = function() {
+								return new Promise(
+										function(resolve, reject) {
+											$http
+													.get(
+															'http://localhost:9060/Data/department/allDepartments')
+													.then(function(response) {
+														resolve(response.data);
+													}, function(error) {
+														reject([]);
+													});
+										});
+							}
+
+							this.saveDepartmentData = function(data) {
+								return new Promise(
+										function(resolve, reject) {
+											$http
+													.post(
+															'http://localhost:9060/Data/department/saveDepartments',
+															data)
+													.then(function(response) {
+														resolve(response.data);
+													}, function(error) {
+														reject([]);
+													});
+										});
+							}
+
+						} ]);

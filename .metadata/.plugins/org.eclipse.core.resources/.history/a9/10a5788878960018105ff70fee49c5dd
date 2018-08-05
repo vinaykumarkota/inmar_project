@@ -1,0 +1,35 @@
+package com.vinay.entities;
+
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="SKU002_DEPARTMENT")
+public class DEPARTMENT_SKU002 implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@Column(name="SKU002_DEPARTMENT_ID")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Long sku002DepartmentId;
+	
+	@Column(name="SKU002_DEPARTMENT_NAME")
+	private String sku002DepartmentName;
+	
+	@Column(name="SKU001_LOCATION_DESC")
+	private String sku001LocationDesc;
+	
+	@Column(name="SKU002_ACTV_F")
+	private String sku002ActiveFlag;
+	
+	@Column(name="SKU002_DEPARTMENT_NAME")
+	private String sku002DepartmentName;
+
+}

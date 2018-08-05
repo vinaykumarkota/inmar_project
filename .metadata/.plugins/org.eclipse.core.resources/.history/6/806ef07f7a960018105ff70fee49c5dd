@@ -1,0 +1,5 @@
+package com.vinay.repositories;
+
+public interface Category001DAO {
+
+}

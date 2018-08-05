@@ -1,0 +1,78 @@
+/**
+ * 
+ */
+
+productAppModule.controller("subcategoryController", function($scope, $http){
+	
+$scope.statusDropdown = ["Active","In-Active"];
+	
+	$scope.subcategoryName="";
+	$scope.subcategoryDesc="";
+	$scope.locationName="";
+	$scope.departmentName="";
+	$scope.selectedStatus="";
+
+	
+	$scope.init=function(){
+		
+		$scope.locationDropdown=["USA","Canada"];
+		$scope.departmentDropdown=["Bakery","Dairy","Vegetables"];
+		//data table
+		$scope.subCategoryData=[];
+	}
+	
+	$scope.saveLocation=function(){
+		$scope.subcategorySaveData ={
+				 'subcategoryId':1,
+				 'subcategoryName':$scope.subcategoryObject.categoryName,
+				 'subcategoryDesc': $scope.subcategoryObject.categoryDesc,
+				 'locationName':$scope.subcategoryObject.locationName,
+				 'departmentName':$scope.subcategoryObject.departmentName,
+//				 'categoryName':$scope.subcategoryObject.
+		         'activeFlag': $scope.subcategoryObject.selectedStatus,
+		         'editable':false
+	   			
+	   	}
+		//to  save service
+		console.log($scope.subcategorySaveData);
+	}
+	
+	
+});
+productAppModule
+.service(
+		"departmentService",
+		[
+				'$http',
+				function($http) {
+
+					this.deleteDepartment = function(data) {
+						return new Promise(
+								function(resolve, reject) {
+									$http
+											.post(
+													'http://localhost:9060/Data/department/deleteDepartment',
+													data)
+											.then(function(response) {
+												resolve(response.data);
+											}, function(error) {
+												reject([]);
+											});
+								});
+					}
+
+					this.getAllDepartments = function() {
+						return new Promise(
+								function(resolve, reject) {
+									$http
+											.get(
+													'http://localhost:9060/Data/department/allDepartments')
+											.then(function(response) {
+												resolve(response.data);
+											}, function(error) {
+												reject([]);
+											});
+								});
+					}
+
+				} ]);

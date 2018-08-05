@@ -1,0 +1,23 @@
+package com.vinay.repositories;
+
+import javax.transaction.Transactional;
+
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import com.vinay.entities.Department_SKU002;
+
+@Transactional
+@Repository
+
+public interface Department002DAO extends CrudRepository<Department_SKU002, Long>{
+
+	@Modifying
+	@Query("delete from Department_SKU002 e where sku002DepartmentId=:deptID")
+	void deleteDepartment(@Param("deptID") Long deptID);
+	
+	List<Department_SKU002> getDepartmentsByLoc(@Param("locID") Long locID);
+}

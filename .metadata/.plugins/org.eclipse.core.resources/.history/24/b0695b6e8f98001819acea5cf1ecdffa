@@ -1,0 +1,35 @@
+package com.vinay.services;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.vinay.entities.Category_SKU003;
+import com.vinay.repositories.Category003DAO;
+import com.vinay.vo.CategoryVo;
+
+@Service
+public class CategoryService {
+	
+	@Autowired
+	Category003DAO categoryDAO;
+	
+	public void getAllCategories() {
+		Iterable<Category_SKU003> categoriesList=categoryDAO.findAll();
+		List<CategoryVo> categoryList=new ArrayList<CategoryVo>();
+		for (Category_SKU003 categoryObj : categoriesList) {
+			CategoryVo categoryVo=new CategoryVo();
+			categoryVo.setCategoryId(categoryObj.getSku003CategoryId());
+			categoryVo.setCategoryName(categoryObj.getSku003CategoryName());
+			categoryVo.setCategoryDesc(categoryObj.getSku003CategoryDesc());
+			categoryVo.setLocationId(categoryObj.getDepartment().getLocation().getSku001LocationId());
+			categoryVo.setLocationName(categoryObj.getDepartment().getLocation().getSku001LocationName());
+			categoryVo.setDepartmentId(categoryObj.getDepartment().getSku002DepartmentId());
+			categoryVo.setDepartmentName(categoryObj.getDepartment().getSku002DepartmentName());
+			categoryList.add(categoryVo);
+		}
+	}
+
+}

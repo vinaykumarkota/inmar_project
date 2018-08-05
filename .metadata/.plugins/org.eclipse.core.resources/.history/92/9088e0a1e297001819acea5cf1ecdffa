@@ -1,0 +1,91 @@
+/**
+ * 
+ */
+productAppModule.controller("departmentController", ['$scope','$http','departmentService', function($scope, $http,departmentService){
+	$scope.statusDropdown = ["Active","In-Active"];
+	
+	$scope.department="";
+	$scope.departmentDesc="";
+	$scope.locationName="";
+	$scope.selectedStatus="";
+
+	
+	$scope.init=function(){
+		
+		$scope.locationDropdown=["USA","Canada"];
+		//data table data
+		$scope.departmentData=[];
+		departmentService.getAllDepartments()
+		.then(
+			function(data){
+				$scope.locationData=data;
+//				console.log($scope.locationData);
+				$scope.count=$scope.locationData.length;
+				$scope.$digest();
+			},
+			function()
+			{
+//				alert('error');
+			}
+			);
+		
+	}
+	
+	$scope.saveLocation=function(){
+		$scope.departmentSaveData ={
+				 'departmentId':1,
+				 'departmentName':$scope.departmentObject.department,
+				 'departmentDesc': $scope.departmentObject.departmentDesc,
+				 'locationName':$scope.departmentObject.locationName,
+		         'activeFlag': $scope.departmentObject.selectedStatus,
+		         'editable':false
+	   			
+	   	}
+		//to  save service
+		console.log($scope.departmentSaveData);
+	}
+	
+	
+}]);
+
+productAppModule.service("departmentService",['$http',function($http){
+	
+	this.deleteDepartment=function(data)
+	{
+			return new Promise(function(resolve,reject){
+			$http.post('http://localhost:9060/Data/department/deleteDepartment',data).then(
+			function(response){
+			resolve(response.data);
+			},
+			function(error){
+			reject([]);
+			});
+			});
+	}
+	
+	this.getAllDepartments = function() { 
+		return new Promise(function(resolve,reject){
+			$http.get('http://localhost:9060/Data/department/allDepartments').then(
+				function(response){
+					resolve(response.data);
+				},
+				function(error){
+					reject([]);
+				});
+		});
+		}
+
+	this.saveDepartmentData=function(data)
+	{
+			return new Promise(function(resolve,reject){
+			$http.post('http://localhost:9060/Data/department/saveDepartments',data).then(
+			function(response){
+			resolve(response.data);
+			},
+			function(error){
+			reject([]);
+			});
+			});
+	}
+
+}]);

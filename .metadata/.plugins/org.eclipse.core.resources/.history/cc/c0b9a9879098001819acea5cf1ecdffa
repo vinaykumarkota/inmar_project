@@ -1,0 +1,91 @@
+/**
+ * 
+ */
+
+productAppModule.controller("categoryController", function($scope, $http){
+	
+$scope.statusDropdown = ["Active","In-Active"];
+	
+	$scope.categoryName="";
+	$scope.categoryDesc="";
+	$scope.locationName="";
+	$scope.departmentName="";
+	$scope.selectedStatus="";
+
+	
+	$scope.init=function(){
+		
+		$scope.locationDropdown=["USA","Canada"];
+		$scope.departmentDropdown=["Bakery","Dairy","Vegetables"];
+		//data tbale data
+		$scope.categoryData=[];
+	}
+	
+	$scope.saveLocation=function(){
+		$scope.categorySaveData ={
+				 'categoryId':1,
+				 'categoryName':$scope.categoryObject.categoryName,
+				 'categoryDesc': $scope.categoryObject.categoryDesc,
+				 'locationName':$scope.categoryObject.locationName,
+				 'departmentName':$scope.categoryObject.departmentName,
+		         'activeFlag': $scope.categoryObject.selectedStatus,
+		         'editable':false
+	   			
+	   	}
+		//to  save service
+		console.log($scope.categorySaveData);
+	}
+});
+
+productAppModule
+.service(
+		"categoryService",
+		[
+				'$http',
+				function($http) {
+
+					this.deleteDepartment = function(data) {
+						return new Promise(
+								function(resolve, reject) {
+									$http
+											.post(
+													'http://localhost:9060/Data/department/deleteDepartment',
+													data)
+											.then(function(response) {
+												resolve(response.data);
+											}, function(error) {
+												reject([]);
+											});
+								});
+					}
+
+					this.getAllCategories = function() {
+						return new Promise(
+								function(resolve, reject) {
+									$http
+											.get(
+													'http://localhost:9060/Data/category/allCategories')
+											.then(function(response) {
+												resolve(response.data);
+											}, function(error) {
+												reject([]);
+											});
+								});
+					}
+
+					this.saveDepartmentData = function(data) {
+						return new Promise(
+								function(resolve, reject) {
+									$http
+											.post(
+													'http://localhost:9060/Data/department/saveDepartments',
+													data)
+											.then(function(response) {
+												resolve(response.data);
+											}, function(error) {
+												reject([]);
+											});
+								});
+					}
+
+				} ]);

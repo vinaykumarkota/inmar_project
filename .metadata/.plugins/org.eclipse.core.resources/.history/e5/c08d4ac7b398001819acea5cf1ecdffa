@@ -1,0 +1,110 @@
+package com.vinay.services;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.vinay.entities.Category_SKU003;
+import com.vinay.entities.Department_SKU002;
+import com.vinay.entities.Location_SKU001;
+import com.vinay.repositories.Category003DAO;
+import com.vinay.repositories.Department002DAO;
+import com.vinay.repositories.Location001DAO;
+import com.vinay.vo.CategoryVo;
+import com.vinay.vo.CommonUtil;
+import com.vinay.vo.DepartmentVo;
+import com.vinay.vo.LocationVo;
+import com.vinay.vo.SubCategoryVo;
+
+@Service
+public class LocationService {
+
+	@Autowired
+	Location001DAO location001DAO;
+
+	@Autowired
+	Department002DAO departmentDAO;
+	
+	@Autowired
+	Category003DAO categoryDAO;
+	
+	public List<LocationVo> getAllLocations() {
+
+		Iterable<Location_SKU001> locationList = location001DAO.findAll();
+		List<LocationVo> locVoList = new ArrayList<LocationVo>();
+		for (Location_SKU001 locObj : locationList) {
+			LocationVo voObj = new LocationVo();
+			voObj.setLocationId(locObj.getSku001LocationId());
+			voObj.setLocationName(locObj.getSku001LocationName());
+			voObj.setLocationDesc(locObj.getSku001LocationDesc());
+			voObj.setActiveFlag(locObj.getSku001ActiveFlag());
+			voObj.setEditable(false);
+			locVoList.add(voObj);
+		}
+		return locVoList;
+	}
+
+	public List<LocationVo> saveLocations(List<LocationVo> locList) {
+		for (LocationVo locVo : locList) {
+			Location_SKU001 locObj = new Location_SKU001();
+			locObj.setSku001LocationName(locVo.getLocationName());
+			locObj.setSku001LocationDesc(locVo.getLocationDesc());
+			locObj.setSku001ActiveFlag(CommonUtil.getStatusCode(locVo.getActiveFlag()));
+			if (locVo.getLocationId() != null)
+				locObj.setSku001LocationId(locVo.getLocationId());
+			location001DAO.save(locObj);
+		}
+		return locList;
+	}
+
+	public LocationVo deleteLocations(LocationVo locVo) {
+			Location_SKU001 locObj = location001DAO.findById(locVo.getLocationId()).get();
+			location001DAO.delete(locObj);
+		return locVo;
+	}
+	
+	public List<DepartmentVo> getDepartsByLocation(Long locId){
+		List<DepartmentVo> deptList=new ArrayList<DepartmentVo>();
+		List<Department_SKU002> dataList=departmentDAO.getDepartmentsByLoc(location001DAO.findById(locId).get());
+		for (Department_SKU002 dataObj : dataList) {
+			DepartmentVo voObj=new DepartmentVo();
+			voObj.setDepartmentId(dataObj.getSku002DepartmentId());
+			voObj.setDepartmentName(dataObj.getSku002DepartmentName());
+			voObj.setDepartmentDesc(dataObj.getSku002DepartmentDesc());
+			voObj.setLocationID(dataObj.getLocation().getSku001LocationId());
+			voObj.setLocationName(dataObj.getLocation().getSku001LocationName());
+			deptList.add(voObj);
+		}
+		return deptList;
+	}
+	
+	public List<CategoryVo> getCategoriesByDept(Long locId,Long deptId){
+		List<CategoryVo> categoriesList=new ArrayList<CategoryVo>();
+		List<Department_SKU002> dataList=departmentDAO.getDepartmentsByLoc(location001DAO.findById(locId).get());
+		List<Department_SKU002> deptList=new ArrayList<Department_SKU002>();
+		for (Department_SKU002 dataObj : dataList) {
+			if(dataObj.getSku002DepartmentId().equals(deptId))
+				deptList.add(dataObj);
+		}
+		List<Category_SKU003> cDataList=categoryDAO.getCategoriesByDept(deptList);
+		for (Category_SKU003 catObj : cDataList) {
+			CategoryVo catVo=new CategoryVo();
+			catVo.setCategoryId(catObj.getSku003CategoryId());
+			catVo.setCategoryName(catObj.getSku003CategoryName());
+			catVo.setCategoryDesc(catObj.getSku003CategoryDesc());
+			catVo.setDepartmentId(catObj.getDepartment().getSku002DepartmentId());
+			catVo.setDepartmentName(catObj.getDepartment().getSku002DepartmentName());
+			catVo.setLocationId(catObj.getDepartment().getLocation().getSku001LocationId());
+			catVo.setLocationName(catObj.getDepartment().getLocation().getSku001LocationName());
+			categoriesList.add(catVo);
+		}
+		return categoriesList;
+	}
+	
+	public List<SubCategoryVo> getSubCategoriesByCategory(Long locId,Long deptId,Long catgId){
+		List<SubCategoryVo> subCategoriesList=new ArrayList<SubCategoryVo>();
+		return subCategoriesList;
+	}
+}

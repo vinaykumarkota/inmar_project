@@ -1,0 +1,6 @@
+package com.vinay.repositories;
+
+@Repository
+public class CustomQuery {
+
+}

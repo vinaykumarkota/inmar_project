@@ -1,0 +1,124 @@
+
+<p>&nbsp;</p>
+<p>
+<h3 align="left" style="margin-left: 100px;">Location Master</h3>
+</p>
+<div>
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-sm-2">
+					<!-- <label for="usr"><h3>Search</h3></label> -->
+				</div>
+				<div class="col-sm-2">
+					<label for="usr">Location Name:</label> <input type="text"
+						class="form-control" id="usr" ng-model="locationObject.location"
+						style="width: 120px; margin-bottom: 50px;">
+				</div>
+				<div class="col-sm-2">
+					<label for="usr">Location Description:</label> <input type="text"
+						class="form-control" id="Text1"
+						ng-model="locationObject.locationDesc"
+						style="width: 120px; margin-bottom: 50px;">
+				</div>
+				<div class="col-sm-2">
+					<label for="usr">Status:</label> <select
+						ng-model="locationObject.selectedStatus" class="form-control"
+						ng-options="x for x in statusDropdown"
+						style="width: 120px; margin-bottom: 50px;">
+					</select>
+				</div>
+				<div class="col-sm-2">
+					<!--  <label for="usr">Phone:</label>
+  			 <input type="text" class="form-control" id="Text3" ng-model="statusSearch" style="width: 100px; margin-bottom: 50px;"> -->
+				</div>
+				<div class="col-sm-2">
+					<!-- <label for="usr">Clear Search:</label> -->
+					<input type="button" value="Save" class="btn btn-primary"
+						ng-click="saveLocation()" style="margin-right: 40px;" />
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4"></div>
+				<div class="col-md-4"></div>
+				<div class="col-md-4"></div>
+
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-default" ng-init="init()">
+		<div class="panel-body">
+			<table id="example"
+				class="table table-striped table-bordered dt-responsive nowrap"
+				cellspacing="0" width="100%" style="margin-bottom: 0px;">
+				<thead>
+					<tr>
+						<th class="auto-style11"><input type="checkbox"
+							ng-model="checkToggle" ng-change="SelectAll()"
+							 id="checkMain" ng-checked="checkToggle" />
+						</th>
+						<th class="auto-style7">Lineno <a href=""
+							ng-click="orderByField='id'; reverseSort = !reverseSort"><i
+								class="fa fa-angle-down"></i></a>
+						</th>
+						<th class="auto-style10"><a href=""
+							ng-click="orderByField='locationName'; reverseSort = !reverseSort">
+								Location Name</a></th>
+						<th class="auto-style9"><a href=""
+							ng-click="orderByField='locationDesc'; reverseSort = !reverseSort">Location
+								Description</a></th>
+						<th class="auto-style10"><a href=""
+							ng-click="orderByField='activeFlag'; reverseSort = !reverseSort">Status</a></th>
+
+					</tr>
+				</thead>
+
+				<tr dir-paginate="e in locationData |itemsPerPage:selectedPageno"
+					current-page="currentpage" style="height: 43px;">
+					<td class="auto-style11"><input type="checkbox"
+						ng-model="checkSelected" ng-change="onCheckBoxChange(e.locationId)"
+					 id="checkData" ng-checked="checkValue" />
+					</td>
+					<td class="auto-style7"><span 
+						ng-show="e.editable" style="height: 43px;"> {{ e.locationId }} </span> <span
+						ng-hide="e.editable" style="height: 43px;"> {{ e.locationId }} </span>
+					</td>
+					<td class="auto-style10"><span> <input type="text"
+							ng-model="e.locationName" ng-show="e.editable"
+							style="width: 82px; height: 26px;" required>
+					</span> <span ng-hide="e.editable" style="height: 43px;"> {{
+							e.locationName }} </span></td>
+					<td class="auto-style9"><span><input type="text"
+							ng-model="e.locationDesc" ng-show="e.editable"
+							style="width: 82px" required></span> <span ng-hide="e.editable"
+						style="height: 43px;">{{ e.locationDesc }}</span></td>
+					<td class="auto-style10"><span><input type="text"
+							ng-model="e.activeFlag" ng-show="e.editable" style="width: 103px"
+							required></span> <span ng-hide="e.editable"
+						style="height: 43px;">{{ e.activeFlag }}</span></td>
+
+
+				</tr>
+
+			</table>
+			<div class="row">
+
+				<div class="col-md-4" style="margin-top: 23px;">
+					Results per page: <select ng-model="selectedPageno"
+						ng-options="x for x in pageno">
+					</select>
+				</div>
+				<div class="col-md-4" style="margin-top: 23px;">Location
+					Maintainance 1- {{selectedPageno}} Records of {{count}}</div>
+				<div class="col-md-4" style="height: 50px;">
+					<dir-pagination-controls max-size="4" direction-links="true"
+						boundary-links="true"> </dir-pagination-controls>
+				</div>
+			</div>
+
+
+
+
+		</div>
+	</div>
+</div>

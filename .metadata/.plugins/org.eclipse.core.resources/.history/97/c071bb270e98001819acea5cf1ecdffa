@@ -1,0 +1,15 @@
+package com.vinay.repositories;
+
+import javax.transaction.Transactional;
+
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+import com.vinay.entities.Department_SKU002;
+
+@Transactional
+@Repository
+public interface Department002DAO extends CrudRepository<Department_SKU002, Long>{
+
+	Department_SKU002 deleteDepartment();
+}

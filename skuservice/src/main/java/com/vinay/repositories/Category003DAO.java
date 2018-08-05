@@ -1,0 +1,22 @@
+package com.vinay.repositories;
+
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import com.vinay.entities.Category_SKU003;
+import com.vinay.entities.Department_SKU002;
+import com.vinay.entities.Location_SKU001;
+
+@Transactional
+@Repository
+public interface Category003DAO extends CrudRepository<Category_SKU003, Long>{
+
+	@Query(value="select e from Category_SKU003 e where e.department in (:deptList)")
+	List<Category_SKU003> getCategoriesByDept(@Param("deptList") List<Department_SKU002> deptList);
+}

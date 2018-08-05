@@ -1,0 +1,8 @@
+package com.vinay.services;
+
+@Service
+public class CategoryService {
+	
+	Category001DAO categoryDAO;
+
+}

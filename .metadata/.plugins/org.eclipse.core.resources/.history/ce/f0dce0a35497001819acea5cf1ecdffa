@@ -1,0 +1,41 @@
+/**
+ * 
+ */
+
+productAppModule.controller("fourController", function($scope, $http){
+	
+$scope.statusDropdown = ["Active","In-Active"];
+	
+	$scope.subcategoryName="";
+	$scope.subcategoryDesc="";
+	$scope.locationName="";
+	$scope.departmentName="";
+	$scope.selectedStatus="";
+
+	
+	$scope.init=function(){
+		
+		$scope.locationDropdown=["USA","Canada"];
+		$scope.departmentDropdown=["Bakery","Dairy","Vegetables"];
+		//data table
+		$scope.subCategoryData=[];
+	}
+	
+	$scope.saveLocation=function(){
+		$scope.subcategorySaveData ={
+				 'subcategoryId':1,
+				 'subcategoryName':$scope.subcategoryObject.categoryName,
+				 'subcategoryDesc': $scope.subcategoryObject.categoryDesc,
+				 'locationName':$scope.subcategoryObject.locationName,
+				 'departmentName':$scope.subcategoryObject.departmentName,
+				 'categoryName':$scope.subcategoryObject.
+		         'activeFlag': $scope.subcategoryObject.selectedStatus,
+		         'editable':false
+	   			
+	   	}
+		//to  save service
+		console.log($scope.subcategorySaveData);
+	}
+	
+	
+});

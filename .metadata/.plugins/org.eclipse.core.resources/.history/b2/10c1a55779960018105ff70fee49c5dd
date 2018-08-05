@@ -1,0 +1,14 @@
+package com.vinay.entities;
+
+import java.io.Serializable;
+
+public class Category_SKU003 implements Serializable{
+	
+private static final long serialVersionUID = 1L;
+	
+	
+	public Category_SKU003() {
+	
+	}
+
+}

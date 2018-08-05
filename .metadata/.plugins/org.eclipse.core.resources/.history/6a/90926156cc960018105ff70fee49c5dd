@@ -1,0 +1,7 @@
+package com.vinay.controllers;
+
+@RestController
+@RequestMapping(value="/location")
+public class LocationController {
+
+}

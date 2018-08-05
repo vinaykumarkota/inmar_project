@@ -1,0 +1,7 @@
+package com.vinay.entities;
+
+@Entity
+@Table(name="NESIP006_DEVICE_TYP")
+public class LOCATION_SKU001 implements Serializable{
+
+}

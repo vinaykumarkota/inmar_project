@@ -1,0 +1,9 @@
+package com.vinay.entities;
+
+import java.io.Serializable;
+
+public class DEPARTMENT_SKU002 implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+
+}

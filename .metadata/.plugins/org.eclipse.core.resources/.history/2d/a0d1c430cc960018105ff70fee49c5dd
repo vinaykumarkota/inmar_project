@@ -1,0 +1,19 @@
+package com.vinay.services;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.vinay.entities.Location_SKU001;
+import com.vinay.repositories.Location001DAO;
+
+@Service
+public class LocationService {
+	
+	@Autowired
+	Location001DAO location001DAO;
+	
+	public void getAllLocations() {
+		Iterable<Location_SKU001> locationList=location001DAO.findAll();
+	}
+
+}
