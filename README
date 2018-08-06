@@ -8,9 +8,10 @@ Workspace Setup
 1. Download skuservice zip file into a folder and extract it.
 2. Open eclipse and import the extracted sku service folder as a Gradle Project.
 3.Project is developed with an internal tomcat server that runs on port 9060. So, no need of any external server configuration.
-4.Right click on the project root folder and run as gradle project.
-5.Open browser and hit the url http://localhost:9060/Data/ which in entry point for this project.
-6.Then hit the following urls for necessary data.
+4.Right click on the project root folder and click on gradle and then Refresh gradle project.(to download dependencies).
+5.Right click on the project root folder and run as gradle project.
+6.Open browser and hit the url http://localhost:9060/Data/ which in entry point for this project.
+7.Then hit the following urls for necessary data.
 
 http://localhost:9060/Data/location/allLocations                    ---->  for all locations data.
 http://localhost:9060/Data/department/allDepartments                ---->  for all departments data.
@@ -22,5 +23,32 @@ http://localhost:9060/Data/location/{locId}/department/{deptId}/category        
 http://localhost:9060/Data/location/{locId}/department/{deptId}/category/{catgId}/subcategory        ----> to retrieve all the sub categories with location=locId and department=deptId and category=catgd
 http://localhost:9060/Data/location/{locId}/department/{deptId}/category/{catgId}/subcategory/{subId}      ----> to retrieve a sub category with location=locId and department=deptId and category=catgd and subcategory=subId
 
+
+Project skuUI is all about UI implementation of the project.
+
+Workspace Setup
+-------------------
+
+1. Download skuUI zip file into a folder and extract it.
+2. Open eclipse and import the extracted skuUI folder as a Gradle Project.
+3.Project is developed with an internal tomcat server that runs on port 9050. So, no need of any external server configuration.
+4.Right click on the project root folder and click on gradle and then Refresh gradle project.(to download dependencies).
+5.Right click on the project root folder and run as gradle project.
+6.Open browser and hit the url http://localhost:9050/UiWeb which in entry point for this project.
+7.You can able to see the main page of the project with menus and sub menus.
+
+
+Since this is a gradle project no need to download dependencies externally. 
+All the necessary dependencies are mentioned in build.gradle file of each project.
+Once you perform gradle refresh of the project all the necessary dependencies will be downloaded.
+If you want any other dependencies,mention in build.gradle file according the maven central and perform gradle refresh of the project.
+
+Please follow all these steps accordingly for a smooth project setup.
+
+Please feel free to raise an issue if needed.
+
+
+Thank You
+Vinay Kumar Kota
 
 
