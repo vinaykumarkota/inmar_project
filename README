@@ -1,0 +1,26 @@
+This repostiry(inmar_project) consists of two Gradle Projects skuUI and skuservice.
+
+Project skuservice consists of all the micro services implementation that allows user to perform CRUD operations on data from UI.
+
+Workspace Setup
+-------------------
+
+1. Download skuservice zip file into a folder and extract it.
+2. Open eclipse and import the extracted sku service folder as a Gradle Project.
+3.Project is developed with an internal tomcat server that runs on port 9060. So, no need of any external server configuration.
+4.Right click on the project root folder and run as gradle project.
+5.Open browser and hit the url http://localhost:9060/Data/ which in entry point for this project.
+6.Then hit the following urls for necessary data.
+
+http://localhost:9060/Data/location/allLocations                    ---->  for all locations data.
+http://localhost:9060/Data/department/allDepartments                ---->  for all departments data.
+http://localhost:9060/Data/category/allCategories                   ---->  for all categories data.
+http://localhost:9060/Data/subcategory/allSubCategories             ---->  for all sub categories data.
+
+http://localhost:9060/Data/location/{locId}/department              ----> to retrieve all the departments with location=locId
+http://localhost:9060/Data/location/{locId}/department/{deptId}/category         ----> to retrieve all the categories with location=locId and department=deptId
+http://localhost:9060/Data/location/{locId}/department/{deptId}/category/{catgId}/subcategory        ----> to retrieve all the sub categories with location=locId and department=deptId and category=catgd
+http://localhost:9060/Data/location/{locId}/department/{deptId}/category/{catgId}/subcategory/{subId}      ----> to retrieve a sub category with location=locId and department=deptId and category=catgd and subcategory=subId
+
+
+
